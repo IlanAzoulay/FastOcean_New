@@ -41,14 +41,17 @@ MODIFICATIONS:
 - Changed bl_idname of operators so they wouldn't be in a pre-existing attribute of bpy.ops
 - Respecting PEP8
 - Some less significant synthax changes here and there that don't change the outcome
+
+IMPORTANT NOTE:
+For this to work as an add-on:
+- make sure the name of this file is __init__.py
+- put it in a .zip
+- install the zip as an addon
 """
 
 
-# PANELS =================================
-
-
 class panelsky(bpy.types.Panel):
-    """ce panel fait des courbes"""
+    """Addon's User Interface. This is where buttons are displayed"""
     bl_label = "Fast Landscape"
     bl_idname = "OBJECT_PT_fast"
     bl_space_type = 'VIEW_3D'
@@ -72,9 +75,9 @@ class panelsky(bpy.types.Panel):
 #    OPERATORS
 # ====================================================
 
-# Bouton fastterrain
+
 class fastterrain(bpy.types.Operator):
-    """description"""
+    """Create a random landscape"""
     bl_idname = "create.fastterrain"
     bl_label = "Fast Terrain"
     # bl_options = {'REGISTER', 'UNDO'}
@@ -233,7 +236,9 @@ class fastterrain(bpy.types.Operator):
         return {'FINISHED'}
 
 
-# classe fastocean
+# ---------------------------------
+
+
 class fastocean(bpy.types.Operator):
     """Create a dynamic ocean"""
     bl_idname = "create.fastocean"
@@ -499,14 +504,14 @@ class fastocean(bpy.types.Operator):
         mod_dpaint.canvas_settings.canvas_surfaces["onde"].use_antialiasing = True
         mod_dpaint.canvas_settings.canvas_surfaces["onde"].use_wave_open_border = True
 
-        ground_obj.parent = ocean_obj
-        ground_obj.matrix_parent_inverse = ocean_obj.matrix_world.inverted()  # Keep transform
-
         return {'FINISHED'}
 
 
+# -----------------------------------
+
+
 class collider_ocean(bpy.types.Operator):
-    """Transform the selected object easily into a collider that will generate foam"""
+    """Transform the selected object into a collider that will generate foam"""
     bl_idname = "add.collider_ocean"
     bl_label = "Collider Ocean"
     bl_options = {'REGISTER', 'UNDO'}
@@ -528,8 +533,11 @@ class collider_ocean(bpy.types.Operator):
         return {'FINISHED'}
 
 
+# -------------------------------
+
+
 class fastsky(bpy.types.Operator):
-    """Create a realistic sky as background"""
+    """Create a random realistic sky background"""
     bl_idname = "create.fastsky"  # bl_idname = "world.fastsky"
     bl_label = "Fast Sky"
     bl_options = {'REGISTER', 'UNDO'}
