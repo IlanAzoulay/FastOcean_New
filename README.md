@@ -5,6 +5,6 @@ Example:
 
 The fastocean operator's ID is "create.fastocean". Therefore, you can call it by running the command line:
 
-"bpy.ops.create.fastocean()"
+> bpy.ops.create.fastocean()
 
 Same logic for all other operators.
